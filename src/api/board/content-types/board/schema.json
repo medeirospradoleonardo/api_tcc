@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "boards",
+  "info": {
+    "singularName": "board",
+    "pluralName": "boards",
+    "displayName": "Board",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "timeEstimated": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "Tarefas Pendentes"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "task",
+        "story",
+        "bug"
+      ],
+      "required": true,
+      "default": "task"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "comentaries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comentary.comentary",
+      "mappedBy": "board"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "boards"
+    },
+    "sprint": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sprint.sprint",
+      "inversedBy": "boards"
+    },
+    "responsible": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "responsibleboards"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "ownerBoards"
+    }
+  }
+}
