@@ -9,8 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false,
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -74,21 +73,9 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "company",
-        "employee"
+        "admin",
+        "default"
       ]
-    },
-    "company": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::company.company",
-      "inversedBy": "users"
-    },
-    "ownerCompany": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::company.company",
-      "inversedBy": "ownerUser"
     },
     "ownerBoards": {
       "type": "relation",
@@ -102,18 +89,6 @@
       "target": "api::comentary.comentary",
       "mappedBy": "author"
     },
-    "ownerProjects": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::project.project",
-      "mappedBy": "ownerUser"
-    },
-    "projects": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::project.project",
-      "inversedBy": "users"
-    },
     "responsibleboards": {
       "type": "relation",
       "relation": "oneToMany",
@@ -125,6 +100,12 @@
       "relation": "oneToMany",
       "target": "api::knowledge.knowledge",
       "mappedBy": "author"
+    },
+    "projectUserRoles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-user-role.project-user-role",
+      "mappedBy": "user"
     }
   }
 }

@@ -17,28 +17,16 @@
       "required": true,
       "unique": false
     },
-    "ownerUser": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "ownerProjects"
-    },
-    "users": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "mappedBy": "projects"
-    },
-    "company": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::company.company",
-      "inversedBy": "projects"
-    },
     "sprints": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::sprint.sprint",
+      "mappedBy": "project"
+    },
+    "projectUserRoles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-user-role.project-user-role",
       "mappedBy": "project"
     }
   }

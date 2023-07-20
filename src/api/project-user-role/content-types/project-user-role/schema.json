@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_user_roles",
+  "info": {
+    "singularName": "project-user-role",
+    "pluralName": "project-user-roles",
+    "displayName": "ProjectUserRole",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "role": {
+      "type": "enumeration",
+      "enum": [
+        "leader",
+        "member"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "projectUserRoles"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "projectUserRoles"
+    }
+  }
+}
