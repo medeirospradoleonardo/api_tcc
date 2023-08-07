@@ -1,20 +1,68 @@
-'use strict';
-
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
+  register({ strapi }) {
+    const extensionService = strapi.plugin('graphql').service('extension');
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/*{ strapi }*/) {},
-};
+    extensionService.use(({ nexus }) =>  ({
+      resolversConfig: {
+        'Mutation.deleteProject': {
+          middlewares: [
+            async (resolve, ...args) => {
+
+              // deletando todos os projectUserRoles
+              const projectUserRoles = await strapi.entityService.findMany('api::project-user-role.project-user-role', {
+                filters: { project: {id: args[1].id} }
+              });
+
+              projectUserRoles.map((p) => {
+                strapi.entityService.delete('api::project-user-role.project-user-role', p.id);
+              })
+
+              // deletando todos os boards
+              const boards = await strapi.entityService.findMany('api::board.board', {
+                filters: { project: {id: args[1].id} }
+              });
+
+              boards.map((b) => {
+                strapi.entityService.delete('api::board.board', b.id);
+              })
+
+              // deletando todos os sprints
+              const sprints = await strapi.entityService.findMany('api::sprint.sprint', {
+                filters: { project: {id: args[1].id} }
+              });
+
+              sprints.map((s) => {
+                strapi.entityService.delete('api::sprint.sprint', s.id);
+              })
+
+              return resolve(...args);
+            }
+          ]
+        },
+        'Mutation.createProject': {
+          middlewares: [
+            async (resolve, ...args) => {
+              project = await resolve(...args);
+              const usersAdmin = await strapi.entityService.findMany('plugin::users-permissions.user', {
+                filters: { type: "admin" }
+              });
+
+              usersAdmin.map((u) => {
+                strapi.entityService.create('api::project-user-role.project-user-role', {
+                  data: {
+                    user: u.id,
+                    project: project.value.id,
+                    role: "scrumMaster"
+                  },
+                });
+              })
+
+              console.log(usersAdmin)
+              return project;
+            }
+          ]
+        }
+      }
+    }));
+  }
+}

@@ -15,12 +15,13 @@
     "username": {
       "type": "string",
       "minLength": 3,
-      "unique": true,
+      "unique": false,
       "configurable": false,
       "required": true
     },
     "email": {
       "type": "email",
+      "unique": true,
       "minLength": 6,
       "configurable": false,
       "required": true
@@ -31,7 +32,7 @@
     },
     "password": {
       "type": "password",
-      "minLength": 6,
+      "minLength": 5,
       "configurable": false,
       "private": true
     },
@@ -75,7 +76,9 @@
       "enum": [
         "admin",
         "default"
-      ]
+      ],
+      "default": "default",
+      "required": true
     },
     "ownerBoards": {
       "type": "relation",
@@ -106,6 +109,11 @@
       "relation": "oneToMany",
       "target": "api::project-user-role.project-user-role",
       "mappedBy": "user"
+    },
+    "activeProject": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project.project"
     }
   }
 }

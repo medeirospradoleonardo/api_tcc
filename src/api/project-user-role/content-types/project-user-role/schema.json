@@ -15,7 +15,8 @@
     "role": {
       "type": "enumeration",
       "enum": [
-        "leader",
+        "scrumMaster",
+        "productOwner",
         "member"
       ]
     },
