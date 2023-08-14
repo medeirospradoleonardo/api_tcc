@@ -18,11 +18,11 @@
     },
     "initialDate": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "finalDate": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "boards": {
       "type": "relation",
