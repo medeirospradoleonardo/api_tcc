@@ -64,21 +64,20 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "ownerBoards"
     },
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "Não iniciado",
-        "Em progresso",
-        "Concluído"
-      ],
-      "default": "Não iniciado",
-      "required": false
-    },
     "project": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::project.project",
       "inversedBy": "boards"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "notInitiated",
+        "inProgress",
+        "concluded"
+      ],
+      "default": "notInitiated"
     }
   }
 }
