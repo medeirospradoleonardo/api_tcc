@@ -35,6 +35,10 @@
       "relation": "manyToOne",
       "target": "api::project.project",
       "inversedBy": "sprints"
+    },
+    "expand": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
