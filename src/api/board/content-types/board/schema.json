@@ -78,6 +78,9 @@
         "concluded"
       ],
       "default": "notInitiated"
+    },
+    "conclusionDate": {
+      "type": "date"
     }
   }
 }

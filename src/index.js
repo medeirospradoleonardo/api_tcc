@@ -61,7 +61,35 @@ module.exports = {
               return project;
             }
           ]
-        }
+        },
+        'Mutation.updateBoard': {
+          middlewares: [
+            async (resolve, ...args) => {
+              boardNew = await resolve(...args)
+
+              if(boardNew.value.status == 'concluded'){
+                boardNew.value.conclusionDate = new Date()
+              }else{
+                boardNew.value.conclusionDate = null
+              }
+
+              return boardNew;
+            }
+          ]
+        },
+        'Mutation.createBoard': {
+          middlewares: [
+            async (resolve, ...args) => {
+              boardNew = await resolve(...args)
+
+              if(boardNew.value.status == 'concluded'){
+                boardNew.value.conclusionDate = new Date()
+              }
+
+              return boardNew;
+            }
+          ]
+        },
       }
     }));
   }
