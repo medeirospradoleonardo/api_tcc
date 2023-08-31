@@ -17,12 +17,6 @@
       "required": true,
       "unique": true
     },
-    "boards": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::board.board",
-      "mappedBy": "categories"
-    },
     "knowledge": {
       "type": "relation",
       "relation": "manyToOne",

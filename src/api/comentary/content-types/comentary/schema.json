@@ -15,12 +15,6 @@
     "content": {
       "type": "richtext"
     },
-    "board": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::board.board",
-      "inversedBy": "comentaries"
-    },
     "author": {
       "type": "relation",
       "relation": "manyToOne",

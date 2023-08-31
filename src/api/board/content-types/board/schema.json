@@ -28,23 +28,11 @@
         "story",
         "bug"
       ],
-      "required": true,
+      "required": false,
       "default": "task"
     },
     "description": {
       "type": "richtext"
-    },
-    "comentaries": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::comentary.comentary",
-      "mappedBy": "board"
-    },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "inversedBy": "boards"
     },
     "sprint": {
       "type": "relation",
@@ -77,10 +65,12 @@
         "inProgress",
         "concluded"
       ],
-      "default": "notInitiated"
+      "default": "notInitiated",
+      "required": true
     },
     "conclusionDate": {
-      "type": "date"
+      "type": "date",
+      "required": false
     }
   }
 }
