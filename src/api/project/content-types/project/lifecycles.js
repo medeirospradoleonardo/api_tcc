@@ -12,6 +12,15 @@ module.exports = {
       await strapi.entityService.delete('api::project-user-role.project-user-role', p.id);
     })
 
+    // deletando todos os activeSprints
+    const activeSprints = await strapi.entityService.findMany('api::active-sprint.active-sprint', {
+      filters: { project: {id: id} }
+    });
+
+    activeSprints.map(async (p) => {
+      await strapi.entityService.delete('api::active-sprint.active-sprint', p.id);
+    })
+
     // deletando todos os boards
     const boards = await strapi.entityService.findMany('api::board.board', {
       filters: { project: {id: id} }
@@ -29,7 +38,6 @@ module.exports = {
     sprints.map(async (s) => {
       await strapi.entityService.delete('api::sprint.sprint', s.id);
     })
-
   },
   async afterCreate(event) {
     const { id } = event.result;

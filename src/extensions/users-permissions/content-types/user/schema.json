@@ -114,6 +114,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::project.project"
+    },
+    "activeSprints": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::active-sprint.active-sprint",
+      "mappedBy": "user"
     }
   }
 }
