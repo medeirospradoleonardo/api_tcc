@@ -4,7 +4,8 @@
   "info": {
     "singularName": "active-sprint",
     "pluralName": "active-sprints",
-    "displayName": "activeSprint"
+    "displayName": "ActiveSprint",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
