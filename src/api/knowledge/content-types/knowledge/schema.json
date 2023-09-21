@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -19,8 +19,7 @@
     "categories": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::category.category",
-      "mappedBy": "knowledge"
+      "target": "api::category.category"
     },
     "content": {
       "type": "richtext",
