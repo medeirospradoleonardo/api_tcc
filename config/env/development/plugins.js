@@ -2,6 +2,7 @@ module.exports = {
   //
   graphql: {
     config: {
+      defaultLimit: 100,
       endpoint: '/graphqlapi',
     },
     playgroundAlways: false,

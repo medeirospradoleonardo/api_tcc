@@ -23,13 +23,23 @@
     },
     "content": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "author": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "knowledges"
+    },
+    "usersCanEdit": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "stories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::story.story"
     }
   }
 }
