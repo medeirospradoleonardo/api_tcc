@@ -16,6 +16,12 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "knowledges": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::knowledge.knowledge",
+      "inversedBy": "categories"
     }
   }
 }

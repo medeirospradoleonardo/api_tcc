@@ -18,8 +18,9 @@
     },
     "categories": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category"
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "knowledges"
     },
     "content": {
       "type": "richtext",
