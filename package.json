@@ -16,6 +16,7 @@
     "@strapi/plugin-users-permissions": "4.11.2",
     "@strapi/strapi": "4.11.2",
     "pg": "8.6.0",
+    "pg-connection-string": "^2.6.2",
     "strapi-plugin-entity-relationship-chart": "^4.1.0"
   },
   "author": {

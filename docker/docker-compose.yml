@@ -2,19 +2,16 @@ version: '4'
 
 services:
   api_tcc:
-    container_name: strapi
+    container_name: api_tcc
     build: .
+    env_file: .env
     image: naskio/strapi
     environment:
       NODE_ENV: ${NODE_ENV}
       NODE_VERSION: ${NODE_VERSION}
       YARN_VERSION: ${YARN_VERSION}
-      DATABASE_HOST: db
-      DATABASE_CLIENT: ${DATABASE_CLIENT}
-      DATABASE_PORT: ${DATABASE_PORT}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      PORT: ${PORT}
+      DATABASE_URL: ${DATABASE_URL}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
       APP_KEYS: ${APP_KEYS}
@@ -23,27 +20,29 @@ services:
       - 1338:1338
     volumes:
       - /home/api_tcc:/srv/app # Nesse caso, copie o projeto para /home/Strapi/
+      # - ./app:/srv/app
     depends_on:
-      - db_tcc
+      - db
     networks:
       - strapi
 
-  db_tcc:
+  db:
     container_name: postgres
+    env_file: .env
     image: postgres
     volumes:
-      - ./db:/var/lib/postgresql/data
+      # - ./db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - 5433:5433
+      - 5432:5432
     networks:
       - strapi
 
 volumes:
-  strapi-data:
+  api-tcc-data:
 
 networks:
   strapi:
