@@ -1,7 +1,7 @@
 version: '4'
 
 services:
-  strapi:
+  api_tcc:
     container_name: strapi
     build: .
     image: naskio/strapi
@@ -20,15 +20,15 @@ services:
       APP_KEYS: ${APP_KEYS}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - 1337:1337
+      - 1338:1338
     volumes:
-      - ./app:/srv/app
+      - /home/api_tcc:/srv/app # Nesse caso, copie o projeto para /home/Strapi/
     depends_on:
-      - db
+      - db_tcc
     networks:
       - strapi
 
-  db:
+  db_tcc:
     container_name: postgres
     image: postgres
     volumes:
@@ -38,7 +38,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - 5432:5432
+      - 5433:5433
     networks:
       - strapi
 
