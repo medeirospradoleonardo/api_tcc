@@ -1,48 +1,51 @@
-version: '4'
+version: "3"
 
 services:
-  api_tcc:
-    container_name: api_tcc
-    build: .
+  app:
+    build:
+      context: .
     env_file: .env
-    image: naskio/strapi
+    container_name: api_tcc
+    restart: unless-stopped
     environment:
       NODE_ENV: ${NODE_ENV}
       NODE_VERSION: ${NODE_VERSION}
       YARN_VERSION: ${YARN_VERSION}
-      PORT: ${PORT}
       DATABASE_URL: ${DATABASE_URL}
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: db
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
       APP_KEYS: ${APP_KEYS}
       JWT_SECRET: ${JWT_SECRET}
-    ports:
-      - 1338:1338
     volumes:
-      - /home/api_tcc:/srv/app # Nesse caso, copie o projeto para /home/Strapi/
-      # - ./app:/srv/app
+      - ./app:/srv/app
+    ports:
+      - 1337:1337
     depends_on:
       - db
     networks:
       - strapi
 
   db:
+    image: postgres
     container_name: postgres
     env_file: .env
-    image: postgres
-    volumes:
-      # - ./db:/var/lib/postgresql/data
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_DATABASE: ${DATABASE_PASSWORD}
+    volumes:
+      # - ./criarDatabase.sql:/docker-entrypoint-initdb.d/criarDatabase.sql
+      # - ./data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
       - strapi
 
 volumes:
-  api-tcc-data:
+  strapi-data:
 
 networks:
   strapi:
