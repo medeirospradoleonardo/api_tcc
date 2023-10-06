@@ -1,5 +1,12 @@
 module.exports = {
-  //
+  email: {
+    provider: "nodemailer",
+    providerOptions: {
+      host: "localhost",
+      port: 1025,
+      ignoreTLS: true,
+    },
+  },
   graphql: {
     enabled: true,
     config: {
