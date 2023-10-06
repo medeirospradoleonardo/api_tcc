@@ -5,7 +5,7 @@ module.exports = {
     config: {
       defaultLimit: 100,
       endpoint: '/graphql',
-      playgroundAlways: true,
+      playgroundAlways: false,
       shadowCRUD: true,
       depthLimit: 100,
       amountLimit: 10000,
