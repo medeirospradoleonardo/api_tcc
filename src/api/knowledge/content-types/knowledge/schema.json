@@ -41,6 +41,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::story.story"
+    },
+    "allUsersCanEdit": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
